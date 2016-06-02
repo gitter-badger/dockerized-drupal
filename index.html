@@ -19,13 +19,13 @@
     </section>
 
     <section class="main-content">
-      <p><a href="https://travis-ci.org/dminca/dockerized-drupal"><img src="https://travis-ci.org/dminca/dockerized-drupal.svg?branch=master" alt="Build Status"></a></p>
+      <p><a href="https://travis-ci.org/dminca/dockerized-drupal"><img src="https://travis-ci.org/dminca/dockerized-drupal.svg?branch=master" alt="Build Status"></a> <a href="https://imagelayers.io/?images=completit/dockerized-drupal:latest" title="Get your own badge on imagelayers.io"><img src="https://imagelayers.io/badge/completit/dockerized-drupal:latest.svg" alt=""></a></p>
 
-<h2>
-<a id="drupal-development-environment-based-on-docker-containers" class="anchor" href="#drupal-development-environment-based-on-docker-containers" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Drupal development environment based on Docker containers</h2>
+<h1>
+<a id="drupal-dev-env-based-on-docker" class="anchor" href="#drupal-dev-env-based-on-docker" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Drupal dev env based on Docker</h1>
 
 <blockquote>
-<p>Run Drupal <strong>8.1.1</strong> from Docker containers without having to worry about installing and configuring Apache + PHP and MySQL / PostgreSQL</p>
+<p>Run Drupal <strong>8.1.2</strong> on Docker containers and develop anything you want without focusing on installing/configuring Apache+PHP and MySQL/PostgreSQL.</p>
 </blockquote>
 
 <h2>
@@ -54,34 +54,43 @@
 localhost without wasting time to install <em>Apache + PHP + Drupal</em> on your machine.</p>
 
 <h2>
-<a id="during-drupal-install" class="anchor" href="#during-drupal-install" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>During Drupal install</h2>
+<a id="credentials" class="anchor" href="#credentials" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Credentials</h2>
 
-<p>At the <strong>Set up database</strong> step you need to add the <strong>PostgreSQL container IPAddress</strong>.</p>
+<p>The following credentials are used along the installation:</p>
 
-<div class="highlight highlight-source-shell"><pre>docker inspect -f <span class="pl-s"><span class="pl-pds">'</span>{{.NetworkSettings.IPAddress}}<span class="pl-pds">'</span></span> dockerizeddrupal_psql_1</pre></div>
+<ul>
+<li>
+<strong>DB_DATABASE:</strong> <code>drupal</code>
+</li>
+<li>
+<strong>DB_USERNAME:</strong> <code>drupal</code>
+</li>
+<li>
+<strong>DB_PASSWORD:</strong> <code>drupal</code>
+</li>
+<li>
+<strong>DB_HOSTNAME:</strong> <code>dockerizeddrupal_mysql_1</code> or <code>dockerizeddrupal_psql_1</code>
+</li>
+</ul>
 
-<p>where <code>dockerizeddrupal_psql_1</code> is the <strong>container name</strong></p>
+<p>Choose the proper <code>DB_HOSTNAME</code> depending on which Database you use: MySQL or PostgreSQL.</p>
 
-<p>or MySQL container IP Address:</p>
+<h4>
+<a id="note-for-db_hostname" class="anchor" href="#note-for-db_hostname" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Note for DB_HOSTNAME</h4>
 
-<div class="highlight highlight-source-shell"><pre>docker inspect -f <span class="pl-s"><span class="pl-pds">'</span>{{.NetworkSettings.IPAddress}}<span class="pl-pds">'</span></span> dockerizeddrupal_mysql_1</pre></div>
-
-<p>in case you're using MySQL.</p>
+<p>In case there are problems with the host of the db, do <code>docker ps</code> and copy the NAME of
+the DB Docker container</p>
 
 <h2>
 <a id="other-commands" class="anchor" href="#other-commands" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Other commands</h2>
 
-<div class="highlight highlight-source-shell"><pre><span class="pl-c"># stop containers</span>
-make down     
+<div class="highlight highlight-source-shell"><pre>make down     <span class="pl-c"># stop containers</span>
 
-<span class="pl-c"># enter the Drupal container</span>
-make <span class="pl-k">in</span>       
+make <span class="pl-k">in</span>       <span class="pl-c"># enter the Drupal container</span>
 
-<span class="pl-c"># restart containers</span>
-make restart
+make restart  <span class="pl-c"># restart containers</span>
 
-<span class="pl-c"># remove containers and all local docker images</span>
-make clean    </pre></div>
+make clean    <span class="pl-c"># remove containers and all local docker images</span></pre></div>
 
 <h2>
 <a id="contributing" class="anchor" href="#contributing" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Contributing</h2>
