@@ -1,9 +1,9 @@
 web:
-  image: completit/dockerized-drupal
+  build: ./docker
   ports:
     - "80:80"
   volumes:
-    - ./app:/var/www/html
+    - ./app:/var/www/localhost/htdocs
   links:
     - mysql
     # - psql
